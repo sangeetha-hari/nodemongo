@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 console.log(process.env);
-const PORT= 9000;
+const PORT= process.env.PORT;
 const app=express();
 // const movies=[
 //     {
@@ -83,7 +83,7 @@ const app=express();
 // const MONGO_URL="mongodb://localhost:27017";
 // mongodb+srv://sangeetha:<password>@cluster0.zqxknkp.mongodb.net/?retryWrites=true&w=majority
 
-const MONGO_URL="mongodb://localhost"
+const MONGO_URL=process.env.MONGO_URL;
 // const MONGO_URL="mongodb+srv://sangeetha:Sangeetha*13@cluster0.zqxknkp.mongodb.net";
 
 async function createConnection(){
