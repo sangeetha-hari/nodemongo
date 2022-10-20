@@ -6,7 +6,7 @@ import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 
 dotenv.config();
-console.log(process.env);
+console.log(process.env.MONGO_URL);
 const PORT= process.env.PORT;
 const app=express();
 // const movies=[
