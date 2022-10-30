@@ -4,6 +4,9 @@ import  express  from "express";
 
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
+import { getMovieByID, deleteMovieById, addMovies, getAllMovies } from "./helper.js";
+import {moviesRouter} from './routes/movies.js'
+
 
 dotenv.config();
 console.log(process.env.MONGO_URL);
@@ -93,63 +96,77 @@ async function createConnection(){
   return client;
 }
 
-const client= await createConnection();
+export const client= await createConnection();
 app.use(express.json());
+
+
 
 //Rest endpoints
 app.get("/", (req,res)=>{res.send("hello everyone")});
 
-// app.get("/movies", (req,res)=>{res.send(movies)});
-app.get("/movies/:id", async (req,res)=>{
-  const {id}=req.params;
-  console.log(id);
-  //db.movies.findOne({id:102})
-  const movie= await client.db('B37WD').collection('movies').findOne({id:id});
-  // const movie=movies.find((mv)=>mv.id==id)
-  // res.send(movie);
-  movie ? res.send(movie): res.status(404).send({message: "No movie found"});
-  });
+// movied to movies.js
+// // app.get("/movies", (req,res)=>{res.send(movies)});
+// app.get("/movies/:id", async (req,res)=>{
+//   const {id}=req.params;
+//   console.log(id);
+//   //db.movies.findOne({id:102})
+//   const movie= await getMovieByID(id);
+//   // const movie=movies.find((mv)=>mv.id==id)
+//   // res.send(movie);
+//   movie ? res.send(movie): res.status(404).send({message: "No movie found"});
+//   });
 
-  // To delete
-  app.delete("/movies/:id", async (req,res)=>{
-    const {id}=req.params;
-    console.log(id);
-    //db.movies.findOne({id:102})
-    const movie= await client.db('B37WD').collection('movies').deleteOne({id:id});
-    // const movie=movies.find((mv)=>mv.id==id)
-    res.send(movie);
-    });
-
-//POST method to insert data 
-app.post("/movies",express.json(),async(req,res)=>{
-  const newMovies=req.body;
-  console.log(newMovies);
-  const result= await client.db('B37WD').collection('movies').insertMany(newMovies);
-  res.send(result)
-})
-  // querysearch
-
-  app.get("/movies",async(req,res)=>{
-    // const {name,language,rating,}= req.query
-    console.log(req.query);
-    if(req.query.rating){
-      req.query.rating= +req.query.rating;
-    }
-    // const movie1=[];
-    const movies= await (await client.db('B37WD').collection('movies').find(req.query).toArray());
-    // {
-    //   filtermovies= filtermovies.filter((mv)=>mv.name==name);
-    // }
-    // if(language)
-    // {
-    //   filtermovies= filtermovies.filter((mv)=>mv.language==language);
-    // }
-    // if(rating)
-    // {
-    //   filtermovies= filtermovies.filter((mv)=>mv.rating==rating);
-    // }
-    res.send(movies);
+//   // To delete
+//   app.delete("/movies/:id", async (req,res)=>{
+//     const {id}=req.params;
+//     console.log(id);
+//     //db.movies.findOne({id:102})
+//     const movie= await deleteMovieById(id);
+//     // const movie=movies.find((mv)=>mv.id==id)
+//     res.send(movie);
+//     });
 
 
-  })
+// //POST method to insert data 
+// app.post("/movies",express.json(),async(req,res)=>{
+//   const newMovies=req.body;
+//   console.log(newMovies);
+//   const result= await addMovies(newMovies);
+//   res.send(result)
+// })
+ 
+// // querysearch
+
+//   app.get("/movies",async(req,res)=>{
+//     // const {name,language,rating,}= req.query
+//     console.log(req.query);
+//     if(req.query.rating){
+//       req.query.rating= +req.query.rating;
+//     }
+//     // const movie1=[];
+//     const movies= await getAllMovies(req);
+//     // {
+//     //   filtermovies= filtermovies.filter((mv)=>mv.name==name);
+//     // }
+//     // if(language)
+//     // {
+//     //   filtermovies= filtermovies.filter((mv)=>mv.language==language);
+//     // }
+//     // if(rating)
+//     // {
+//     //   filtermovies= filtermovies.filter((mv)=>mv.rating==rating);
+//     // }
+//     res.send(movies);
+
+
+//   })
+
+//specify the routes
+app.use('/movies', moviesRouter)
+
+
+//Create a server
 app.listen(PORT,()=>console.log("Server started on port number:", PORT));
+
+
+
