@@ -9,13 +9,13 @@ export async function getMovieByID(id) {
 //function to query ---delete movies by ID
 export async function deleteMovieById(id) {
   return await client.db('B37WD').collection('movies').deleteOne({ id: id });
-}
+};
 //function to query the mongodb--- post operation
 export async function addMovies(newMovies) {
   return await client.db('B37WD').collection('movies').insertMany(newMovies);
 }
 
-export async function updateMovie(updatedMovie,id) {
-  return await client.db('B37WD').collection('movies').updateOne({ id: id },{$set:updatedMovie});
+export async function updateMovieByID(id,updatedMovie) {
+  return await client.db('B37WD').collection('movies').updateOne({id:id},{$set: updatedMovie})
 }
 

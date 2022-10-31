@@ -1,5 +1,5 @@
 import express from "express";
-import { getMovieByID, deleteMovieById, addMovies, getAllMovies,updateMovie } from "../helper.js";
+import { getMovieByID, deleteMovieById, addMovies, getAllMovies,updateMovieByID } from "../helper.js";
 const router = express.Router();
 
 // app.get("/movies", (req,res)=>{res.send(movies)});
@@ -58,12 +58,12 @@ router.get("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   console.log(id);
-  const updatedMovie = req.body;
+  const updatedMovie=req.body;
   console.log(updatedMovie);
   //db.movies.updatedOne({id:102})
-  const movie = await updateMovie(updatedMovie,id);
+  const result = await updateMovieByID(id, updatedMovie);
   // const movie=movies.find((mv)=>mv.id==id)
-  res.send(movie);
+  res.send(result);
 });
 
 export const moviesRouter=router;
