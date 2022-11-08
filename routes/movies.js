@@ -1,9 +1,13 @@
 import express from "express";
 import { getMovieByID, deleteMovieById, addMovies, getAllMovies,updateMovieByID } from "../helper.js";
+// import {auth} from "../middleware/auth.js"
 const router = express.Router();
 
+// get movies by ids
 // app.get("/movies", (req,res)=>{res.send(movies)});
-router.get("/:id", async (req, res) => {
+router.get("/:id",
+// auth, 
+async (req, res) => {
   const { id } = req.params;
   console.log(id);
   //db.movies.findOne({id:102})
@@ -32,7 +36,9 @@ router.post("/", express.json(), async (req, res) => {
 });
 
 // querysearch
-router.get("/", async (req, res) => {
+router.get("/",
+// auth, 
+async (req, res) => {
   // const {name,language,rating,}= req.query
   console.log(req.query);
   if (req.query.rating) {

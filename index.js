@@ -4,9 +4,9 @@ import  express  from "express";
 
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
-import { getMovieByID, deleteMovieById, addMovies, getAllMovies } from "./helper.js";
-import {moviesRouter} from './routes/movies.js'
 
+import {moviesRouter} from './routes/movies.js'
+import {usersRouter} from './routes/userRouter.js'
 
 dotenv.config();
 console.log(process.env.MONGO_URL);
@@ -164,9 +164,12 @@ app.get("/", (req,res)=>{res.send("hello everyone")});
 //specify the routes
 app.use('/movies', moviesRouter)
 
+app.use('/user',usersRouter)
+
 
 //Create a server
 app.listen(PORT,()=>console.log("Server started on port number:", PORT));
 
 
 
+// console.log(genPassword("pass123"))
