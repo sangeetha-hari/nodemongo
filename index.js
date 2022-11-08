@@ -1,17 +1,22 @@
 // const express= require("express"); //3rd party pkage
 // const {mongoClient}= require("mongodb")
 import  express  from "express";
-
+import cors from "cors"
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 
 import {moviesRouter} from './routes/movies.js'
 import {usersRouter} from './routes/userRouter.js'
 
+
+
+
+
 dotenv.config();
 console.log(process.env.MONGO_URL);
 const PORT= process.env.PORT;
 const app=express();
+app.use(cors())
 // const movies=[
 //     {
 //         "id": "100",
