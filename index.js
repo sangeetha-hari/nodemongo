@@ -1,7 +1,8 @@
 // const express= require("express"); //3rd party pkage
 // const {mongoClient}= require("mongodb")
-import  express  from "express";
 import cors from "cors"
+import  express  from "express";
+
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 
