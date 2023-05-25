@@ -14,10 +14,11 @@ import {usersRouter} from './routes/userRouter.js'
 
 
 dotenv.config();
-console.log(process.env.MONGO_URL);
-const PORT= process.env.PORT;
 const app=express();
 app.use(cors())
+console.log(process.env.MONGO_URL);
+const PORT= process.env.PORT;
+
 // const movies=[
 //     {
 //         "id": "100",

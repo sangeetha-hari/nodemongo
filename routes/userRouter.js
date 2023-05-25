@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 
+
 const router = express.Router();
 
 // post method to insert the user data
@@ -61,7 +62,7 @@ router.post("/login", express.json(), async (req, res) => {
   }
 
   //issue a token
-  const token= jwt.sign({id:userFromDB._id},process.env.KEY);
+  const token= jwt.sign({id:userFromDB._id},process.env.SECRET_KEY);
   res.send({ message: "Login Succesfull", token: token });
 });
 export const usersRouter = router;

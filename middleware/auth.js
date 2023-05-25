@@ -9,7 +9,7 @@ export const auth= (req, res,next)=>{
     console.log(token);
     // verify the token
     try {
-        jwt.verify(token,process.env.KEY);
+        jwt.verify(token,process.env.SECRET_KEY);
          //only if next() is given response will be sent.
          next();
     } catch (error) {
